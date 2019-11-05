@@ -4,7 +4,7 @@
         <script src='https://code.jquery.com/jquery-1.7.2.min.js'></script>
         <script src='socket.io/socket.io.js'></script>
         <script>
-            var socket = io.connect('http://localhost:3000');
+            var socket = io.connect('https://socket-io-test-123.herokuapp.com/');
             socket.on('welcome', function(data) {
                 $('#messages').append('<li>' + data.message + '</li>');
                 socket.emit('i am client', {data: 'foo!'});
