@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html>
     <head>
         <script src='https://code.jquery.com/jquery-1.7.2.min.js'></script>
@@ -11,10 +11,46 @@
             });
             socket.on('time', function(data) {
                 console.log(data);
-                $('#messages').append('<li>' + data.time + '</li>');
+                //$('#messages').append('<li>' + data.time + '</li>');
+            });
+            socket.on('display-callback', function(data) {
+                console.log(data)
+                $('#messages').append('<li>' + data.message + '</li>');
             });
             socket.on('error', function() { console.error(arguments) });
             socket.on('message', function() { console.log(arguments) });
+        
+        </script>
+    </head>
+    <body>
+        <ul id='messages'></ul>
+    </body>
+</html> -->
+
+<!doctype html>
+<html>
+    <head>
+        <script src='https://code.jquery.com/jquery-1.7.2.min.js'></script>
+        <script src='socket.io/socket.io.js'></script>
+        <script>
+            //var socket = io.connect('https://socket-io-test-123.herokuapp.com/');
+            
+            var socket = io.connect('http://localhost:3000/');
+            socket.on('welcome', function(data) {
+                $('#messages').append('<li>' + data.message + '</li>');
+                socket.emit('i am client', {data: 'foo!'});
+            });
+            socket.on('time', function(data) {
+                console.log(data);
+                $('#messages').append('<li>' + data.time + '</li>');
+            });
+            
+            socket.on('error', function() { console.error(arguments) });
+            socket.on('message', function() { console.log(arguments) });
+
+            socket.on('user-test', function(data) {
+                console.log(data);
+            });
         </script>
     </head>
     <body>
